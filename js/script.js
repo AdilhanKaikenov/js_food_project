@@ -97,13 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
           modal = document.querySelector('.modal'),
           modalCloseBtn = document.querySelector('[data-close]');
 
+    function openModal() {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        // Or the option with toggle - but then assign the class in the index html file
+        document.body.style.overflow = 'hidden'; // To prevent the page from scrolling when modal window is shown
+        clearInterval(modalTimerId);
+    }
+
     modalTrigger.forEach(item => {
-        item.addEventListener('click', () => {
-            modal.classList.add('show');
-            modal.classList.remove('hide');
-            // Or the option with toggle - but then assign the class in the index html file
-            document.body.style.overflow = 'hidden'; // To prevent the page from scrolling when modal window is shown
-        });
+        item.addEventListener('click', openModal); 
     });
 
     function closeModal() {
@@ -126,6 +129,15 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal();
         }
     });
+
+    const modalTimerId = setTimeout(openModal, 3000);
     
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', showModalByScroll);
 });
 
