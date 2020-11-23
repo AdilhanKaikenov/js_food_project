@@ -1,3 +1,5 @@
+import {getResource} from '../services/services';
+
 function cards() {
     // Using classes for cards
     class MenuCard {
@@ -10,11 +12,11 @@ function cards() {
             this.classes = classes;
             this.parent = document.querySelector(parentSelector);
             this.transfer = 27;
-            this.changeToUAH(); 
+            this.changeToUAH();
         }
 
         changeToUAH() {
-            this.price = this.price * this.transfer; 
+            this.price = this.price * this.transfer;
         }
 
         render() {
@@ -41,32 +43,28 @@ function cards() {
         }
     }
 
-    async function getResource(url) {
-        let res = await fetch(url);
-    
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-    
-        return await res.json();
-    }
-
     getResource('http://localhost:3000/menu')
-    .then(data => {
-        data.forEach(({img, altimg, title, descr, price}) => {
-            new MenuCard(img, altimg, title, descr, price, ".menu .container").render();
+        .then(data => {
+            data.forEach(({
+                img,
+                altimg,
+                title,
+                descr,
+                price
+            }) => {
+                new MenuCard(img, altimg, title, descr, price, ".menu .container").render();
+            });
         });
-    });
-    
+
     // getResource('http://localhost:3000/menu')
     //     .then(data => createCard(data));
-    
+
     // function createCard(data) {
     //     data.forEach(({img, altimg, title, descr, price}) => {
     //         const element = document.createElement('div');
-    
+
     //         element.classList.add("menu__item");
-    
+
     //         element.innerHTML = `
     //             <img src=${img} alt=${altimg}>
     //             <h3 class="menu__item-subtitle">${title}</h3>
@@ -82,4 +80,4 @@ function cards() {
     // }
 }
 
-module.exports = cards;
+export default cards;

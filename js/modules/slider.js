@@ -1,8 +1,8 @@
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter,wrapper, field}) {
     // Slider
 
     // The first slider option:
-    
+
     // let slideIndex = 1;
     // const slides = document.querySelectorAll('.offer__slide'),
     //     prev = document.querySelector('.offer__slider-prev'),
@@ -58,24 +58,24 @@ function slider() {
     let offset = 0;
     let slideIndex = 1;
 
-    const slides = document.querySelectorAll('.offer__slide'),
-        slider = document.querySelector('.offer__slider'),
-        prev = document.querySelector('.offer__slider-prev'),
-        next = document.querySelector('.offer__slider-next'),
-        total = document.querySelector('#total'),
-        current = document.querySelector('#current'),
-        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-        width = window.getComputedStyle(slidesWrapper).width,
-        slidesField = document.querySelector('.offer__slider-inner');
+    const   slides = document.querySelectorAll(slide),
+            slider = document.querySelector(container),
+            prev = document.querySelector(prevArrow),
+            next = document.querySelector(nextArrow),
+            total = document.querySelector(totalCounter),
+            current = document.querySelector(currentCounter),
+            slidesWrapper = document.querySelector(wrapper),
+            width = window.getComputedStyle(slidesWrapper).width,
+            slidesField = document.querySelector(field);
 
     if (slides.length < 10) {
         total.textContent = `0${slides.length}`;
-        current.textContent =  `0${slideIndex}`;
+        current.textContent = `0${slideIndex}`;
     } else {
         total.textContent = slides.length;
-        current.textContent =  slideIndex;
+        current.textContent = slideIndex;
     }
-    
+
     slidesField.style.width = 100 * slides.length + '%';
     slidesField.style.display = 'flex';
     slidesField.style.transition = '0.5s all';
@@ -89,7 +89,7 @@ function slider() {
     slider.style.position = 'relative';
 
     const indicators = document.createElement('ol'),
-          dots = [];
+        dots = [];
     indicators.classList.add('carousel-indicators');
     indicators.style.cssText = `
         position: absolute;
@@ -102,7 +102,7 @@ function slider() {
         margin-right: 15%;
         margin-left: 15%;
         list-style: none;
-    `; 
+    `;
     slider.append(indicators);
 
     for (let i = 0; i < slides.length; i++) {
@@ -134,7 +134,7 @@ function slider() {
         if (offset == (deleteNotDigits(width) * (slides.length - 1))) {
             offset = 0;
         } else {
-            offset += deleteNotDigits(width); 
+            offset += deleteNotDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -184,15 +184,15 @@ function slider() {
 
     function appendZeroToSlideIndex() {
         if (slides.length < 10) {
-            current.textContent =  `0${slideIndex}`;
+            current.textContent = `0${slideIndex}`;
         } else {
-            current.textContent =  slideIndex;
+            current.textContent = slideIndex;
         }
     }
 
     function showActiveNavigationDot() {
         dots.forEach(dot => dot.style.opacity = ".5");
-        dots[slideIndex-1].style.opacity = 1;
+        dots[slideIndex - 1].style.opacity = 1;
     }
 
     function deleteNotDigits(str) {
@@ -200,4 +200,4 @@ function slider() {
     }
 }
 
-module.exports = slider;
+export default slider;
