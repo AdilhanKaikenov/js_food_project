@@ -182,7 +182,7 @@ function cards() {
                 <div class="menu__item-divider"></div>
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    <div class="menu__item-total"><span>${this.price}</span> тенге/день</div>
                 </div>
             `;
             this.parent.append(element);
@@ -218,7 +218,7 @@ function cards() {
     //             <div class="menu__item-divider"></div>
     //             <div class="menu__item-price">
     //                 <div class="menu__item-cost">Цена:</div>
-    //                 <div class="menu__item-total"><span>${price}</span> грн/день</div>
+    //                 <div class="menu__item-total"><span>${price}</span> тенге/день</div>
     //             </div>
     //         `;
     //         document.querySelector(".menu .container").append(element);
